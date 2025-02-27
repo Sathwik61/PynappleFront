@@ -46,7 +46,7 @@ const SignupPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:8080/api/v1/register", {
+    fetch(`${import.meta.env.VITE_API_URL}/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const SignupPage = () => {
   };
 
   const authgoogle = (parobj) => {
-    fetch("http://localhost:8080/api/v1/register", {
+    fetch(`${import.meta.env.VITE_API_URL}/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

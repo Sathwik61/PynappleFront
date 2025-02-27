@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URI = 'http://localhost:8080/api/v1';
+const API_URI = `${import.meta.env.VITE_API_URL}`;
 
 export const uploadFile = async (data) => {
     try {

@@ -4,8 +4,8 @@ import "./login.css";
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import { Link, useNavigate } from "react-router-dom";
-
 const LoginPage = () => {
+  // const apiUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [msg, setMsg] = useState("");
   const expiryDate = localStorage.getItem("expiryDate");
@@ -47,7 +47,7 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:8080/api/v1/login`, {
+    fetch(`${import.meta.env.VITE_API_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +79,7 @@ const LoginPage = () => {
   };
 
   const authgoogle = (parobj) => {
-    fetch(`http://localhost:8080/api/v1/register`, {
+    fetch(`${import.meta.env.VITE_API_URL}/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -118,6 +118,7 @@ const LoginPage = () => {
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             {typedText}
+            
           </h2>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div>
