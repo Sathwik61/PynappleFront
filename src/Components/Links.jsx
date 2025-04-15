@@ -102,14 +102,14 @@ function Links() {
                   </div>
                   <div className="flex items-center mb-4">
                     <span className="text-md font-medium text-black break-all">
-                      http://localhost:8080/api/v1/file/{file._id}
+                    ${import.meta.env.VITE_API_URL}/file/{file._id}
                     </span>
                   </div>
                   <div className="flex items-center justify-between mb-2">
                     <button
                       onClick={() =>
                         copyTextToClipboard(
-                          `http://localhost:8080/api/v1/file/${file._id}`,
+                          `${import.meta.env.VITE_API_URL}/file/${file._id}`,
                           index
                         )
                       }
@@ -123,7 +123,7 @@ function Links() {
                     </button>
                     <div className="p-2 bg-white rounded-lg">
                       <QRCode
-                        value={`http://localhost:8080/api/v1/file/${file._id}`}
+                        value={`${import.meta.env.VITE_API_URL}/file/${file._id}`}
                         size={128}
                       />
                     </div>
