@@ -10,6 +10,7 @@ const Chatbot = () => {
   const [sendOnce, setSendOnce] = useState(true);
   const [file, setFile] = useState(null);
   const [result, setResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const expiryDate = localStorage.getItem("expiryDate");
   if (expiryDate === "null") {
@@ -17,13 +18,15 @@ const Chatbot = () => {
   }
 
   useEffect(() => {
-    console.log("useEffect - Checking persisted state");
+    // console.log("useEffect - Checking persisted state");
     let a = localStorage.getItem("persist:root");
   }, []);
 
   useEffect(() => {
+    const token = localStorage.getItem("jwtToken");
     const getImage = async () => {
       if (file) {
+        setIsLoading(true);
         console.log("Uploading file", file);
         const data = new FormData();
         let uid = localStorage.getItem("uid");
@@ -34,6 +37,7 @@ const Chatbot = () => {
         const response = sendOnce
           ? await tuploadFile(data)
           : await uploadFile(data);
+        setIsLoading(false);
         console.log("Response from API", response);
         setResult(response.path);
       }
@@ -106,8 +110,17 @@ const Chatbot = () => {
               <p className="text-black mt-2 text-sm sm:text-base">
                 Upload and share the download link.
               </p>
+              {isLoading && (
+          <div className="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center rounded-lg z-10">
+            <div className="flex flex-col items-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-orange-500"></div>
+              <p className="mt-3 text-gray-600">Processing...</p>
+            </div>
+          </div>
+        )}
               {!result ? (
                 <div className="flex items-center justify-center h-full">
+                  
                   <div
                     {...getRootProps()}
                     className={`my-5 w-52 h-52 sm:w-64 sm:h-64 bg-yellow-100 bg-opacity-60 backdrop-filter backdrop-blur-lg shadow-lg rounded-lg p-6 sm:p-8 border-dotted border-2 border-orange-600 ${
