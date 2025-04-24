@@ -51,7 +51,7 @@ function NavBar() {
         >
           Links
         </Link>
-        <button
+        {/* <button
           onClick={handleDarkToggle}
           className="flex items-center justify-center h-10 w-10 text-center text-white text-sm font-medium border border-gray-700 bg-gray-600 rounded-full px-2 py-2 hover:bg-gray-700 hover:text-white transition duration-900 shadow-lg"
         >
@@ -60,7 +60,7 @@ function NavBar() {
           ) : (
             <Moon className="h-5 w-5 text-white" />
           )}
-        </button>
+        </button> */}
         <button
           onClick={handleLogout}
           className="text-white text-sm font-medium border border-red-800 bg-red-700 rounded-full px-4 py-1 hover:bg-red-600 hover:from-red-600 hover:to-red-800 hover:text-white transition duration-300 transform hover:scale-105 shadow-lg"
