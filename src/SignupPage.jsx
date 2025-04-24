@@ -8,6 +8,8 @@ import { Link, useNavigate } from "react-router-dom";
 const SignupPage = () => {
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
+  
+  const [isLoading, setIsLoading] = useState(false);
   const expiryDate = localStorage.getItem("expiryDate");
 
   if (expiryDate && new Date(expiryDate) > new Date()) {
@@ -46,6 +48,7 @@ const SignupPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
     fetch(`${import.meta.env.VITE_API_URL}/register`, {
       method: "POST",
       headers: {
@@ -71,6 +74,8 @@ const SignupPage = () => {
       })
       .catch((error) => {
         console.error("Error:", error);
+      }).finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -108,6 +113,15 @@ const SignupPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-yellow-300 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-500 hover:scale-105">
+        
+      {isLoading && (
+          <div className="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center rounded-lg z-10">
+            <div className="flex flex-col items-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-orange-500"></div>
+              <p className="mt-3 text-gray-600">Authenticating...</p>
+            </div>
+          </div>
+        )}
         <div className="px-6 py-8">
           <div className="flex justify-center">
             <img className="h-12 w-auto logo animate-spin-slow" src={s1} alt="Logo" />
